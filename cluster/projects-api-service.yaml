@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-api-svc
+  labels:
+    app: projects-api-svc
+spec:
+  selector:
+    app: projects-api
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

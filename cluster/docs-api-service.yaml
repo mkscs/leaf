@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docs-api-svc
+  labels:
+    app: docs-api-svc
+spec:
+  selector:
+    app: docs-api
+  clusterIP: None
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001

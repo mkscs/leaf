@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs-api
+spec:
+  selector:
+    matchLabels:
+      app: docs-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: docs-api
+    spec:
+      containers:
+        - name: docs-api
+          image: mkscsy/docs-api:a0caa9274c2f5bf906e34f28aac38dbbb3c94f6b
+          ports:
+            - containerPort: 5001

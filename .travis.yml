@@ -1,0 +1,12 @@
+language: generic
+
+services: docker
+
+after_success:
+  - docker image build -t projects-api projects-api/
+  - docker tag projects-api mkscsy/projects-api:$TRAVIS_COMMIT
+  - docker image build -t docs-api docs-api/
+  - docker tag docs-api mkscsy/docs-api:$TRAVIS_COMMIT
+  - echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+  - docker push mkscsy/projects-api:$TRAVIS_COMMIT
+  - docker push mkscsy/docs-api:$TRAVIS_COMMIT

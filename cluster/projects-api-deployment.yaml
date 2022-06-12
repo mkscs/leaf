@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-api
+spec:
+  selector:
+    matchLabels:
+      app: projects-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: projects-api
+    spec:
+      containers:
+        - name: projects-api
+          image: mkscsy/projects-api:a0caa9274c2f5bf906e34f28aac38dbbb3c94f6b
+          ports:
+            - containerPort: 5000
