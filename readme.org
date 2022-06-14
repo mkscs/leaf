@@ -1,0 +1,23 @@
+* Dockerize applications
+
+The first step is to dockerize both docs-api and projects-api. Both are suitable to be used with an Alpine based container image.
+
+* Setup CI to publish docker images to docker hub
+
+Simple TravisCI job will build the docker images from Dockerfiles and push them to Docker hub.
+
+* Deploy applications to Kubernetes cluster
+
+An application requires a deployment and a service definition. I have decided to deploy docs-api as a headless service.
+This means docs-api service  will automatically get a DNS name from kubernetes but no IP. 
+The DNS name makes the underlying pods easily accessible on the local network and also provides the caller with their IPs in case this is needed
+::HINT:: https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services
+We could also use just a ClusterIP with automatic load balancing on pods but then we are giving up some control over the pods.
+Although in this task we dont have a stateful application so we dont really care about that.
+
+
+We deploy an ingress where we target through a selector projects-api service and we implement this logic via an ingress controller. Projects api becomes
+accessible from the public internet with docs-api being available only on the cluster network.
+
+
+
